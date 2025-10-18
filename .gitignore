@@ -1,0 +1,235 @@
+################################
+# Game Boy ROM Files
+################################
+# Compiled ROMs
+*.gb
+*.gbc
+*.gba
+*.cgb
+*.sgb
+
+# ROM patches
+*.ips
+*.bps
+*.ups
+
+# Build output directory
+build/
+bin/
+out/
+dist/
+
+################################
+# GBDK/SDCC Build Artifacts
+################################
+# Object files
+*.o
+*.obj
+*.rel
+
+# Listing files
+*.lst
+*.rst
+
+# Symbol and map files
+*.map
+*.sym
+
+# Intel Hex format
+*.ihx
+*.hex
+
+# Debug databases
+*.cdb
+*.adb
+*.omf
+
+# Assembly output
+*.asm
+*.s
+
+# Linker files
+*.lnk
+*.noi
+*.mem
+
+# SDCC specific
+*.lk
+*.pk
+*.bin
+*.i
+
+################################
+# Emulator Files
+################################
+# Save states
+*.sav
+*.ss1
+*.ss2
+*.ss3
+*.srm
+*.sn1
+*.sn2
+*.sn3
+*.state
+*.st0
+*.st1
+*.st2
+
+# Battery saves
+*.rtc
+*.ram
+
+# SameBoy specific
+*.sav.bak
+*.rtc.bak
+*.s0
+*.s1
+*.s2
+*.s3
+*.s4
+*.s5
+*.s6
+*.s7
+*.s8
+*.s9
+
+# BGB emulator
+*.sgm
+
+# mGBA
+*.savestate
+
+# Screenshots
+*.bmp
+screenshots/
+
+################################
+# Development Tools
+################################
+# Tile/Sprite editors
+*.gbr
+*.gbm
+*.gbtd
+*.gbmb
+
+# Music trackers (if using)
+*.hut
+*.uge
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+################################
+# Editor/IDE Files
+################################
+# VS Code
+.vscode/
+*.code-workspace
+
+# IntelliJ/CLion
+.idea/
+*.iml
+*.ipr
+*.iws
+cmake-build-*/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.*.swp
+.vim/
+tags
+.tags
+
+# Emacs
+*~
+\#*\#
+.\#*
+.emacs.desktop
+.emacs.desktop.lock
+
+################################
+# OS Files
+################################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+.nfs*
+
+################################
+# Build System
+################################
+# Make
+*.d
+.depend
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile.bak
+
+# Logs
+*.log
+logs/
+
+################################
+# Claude/AI Assistant
+################################
+# Claude session files
+.claude/
+*.claude-session
+
+# Backup files
+*.bak
+*.backup
+*.old
+backup/
+
+################################
+# Project Specific
+################################
+# Test ROMs
+test*.gb
+test*.gbc
+debug*.gb
+debug*.gbc
+
+# Documentation builds
+docs/_build/
+docs/html/
+*.pdf
+
+# Personal notes
+notes.txt
+TODO.txt
+personal/
+private/
