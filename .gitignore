@@ -19,6 +19,10 @@ bin/
 out/
 dist/
 
+# Allow release ROMs
+!releases/
+!releases/*.gb
+
 ################################
 # GBDK/SDCC Build Artifacts
 ################################

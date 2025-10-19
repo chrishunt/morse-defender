@@ -2,8 +2,8 @@
 
 # Build and run the Game Boy Color morse code game
 
-# Set GBDK path
-export GBDK_HOME=/opt/gbdk/
+# Set GBDK path (no trailing slash)
+export GBDK_HOME=/opt/gbdk
 
 # Colors for output
 RED='\033[0;31m'

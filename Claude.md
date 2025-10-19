@@ -1,7 +1,7 @@
-# Claude.md - Game Boy Color Morse Code Game
+# Claude.md - Morse Defender (v0.1 Beta)
 
 ## Project Overview
-This is a Game Boy Color morse code learning game built using GBDK-2020 (Game Boy Development Kit). The game is designed to teach and practice morse code through interactive gameplay on Game Boy Color hardware (or emulators).
+Morse Defender is a Game Boy Color morse code learning game built using GBDK-2020 (Game Boy Development Kit). The game teaches morse code through an engaging missile defense mechanic where players must enter morse patterns to protect their cities from falling letters.
 
 ## Development Environment
 
@@ -17,21 +17,18 @@ This is a Game Boy Color morse code learning game built using GBDK-2020 (Game Bo
 
 ## Project Structure
 ```
-gbc-morse-code-game/
+morse-defender/
+├── releases/          # Pre-built ROM releases
+│   └── morse_defender_v0.1_beta.gb
 ├── src/               # C source files
-│   ├── main.c        # Game loop, state management
-│   ├── graphics.c    # Display and rendering
-│   ├── input.c       # Button input handling
-│   ├── audio.c       # Sound generation
-│   └── morse.c       # Morse code logic
+│   ├── morse_adaptive.c  # Main game (adaptive timing)
+│   ├── morse_game_fixed.c
+│   └── morse_game.c
 ├── include/          # Header files
-│   ├── graphics.h
-│   ├── input.h
-│   ├── audio.h
-│   └── morse.h
 ├── res/              # Resources (future sprites/tiles)
 │   └── tiles/
-├── build/            # Compiled output (.gb files)
+├── build/            # Development builds
+│   └── morse_game.gb
 ├── Makefile          # Build configuration
 ├── run.sh            # Build & launch script
 ├── README.md         # User documentation

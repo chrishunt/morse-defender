@@ -1,9 +1,9 @@
-# GBDK-2020 Makefile for Morse Code Game
-# Game Boy Color ROM with morse code mechanics
+# GBDK-2020 Makefile for Morse Command Game
+# Simplified single-file version that actually works!
 
-# GBDK installation directory
-GBDK_HOME = /opt/gbdk/
-LCC = $(GBDK_HOME)bin/lcc
+# GBDK installation directory (no trailing slash)
+GBDK_HOME = /opt/gbdk
+LCC = $(GBDK_HOME)/bin/lcc
 
 # Compiler flags
 # -Wm-yC enables Game Boy Color mode
@@ -11,38 +11,42 @@ LCC = $(GBDK_HOME)bin/lcc
 # -Wl-m generates map file
 LCCFLAGS = -Wm-yC -Wa-l -Wl-m -Wl-j
 
-# Add include directory
-LCCFLAGS += -Iinclude/
+# Default target is the adaptive timing version
+all: adaptive
 
-# Project name
-PROJECTNAME = morse_game
-BINS = build/$(PROJECTNAME).gb
+# Build the adaptive timing version (single button, relative timing)
+adaptive: build_dir
+	$(LCC) $(LCCFLAGS) -o build/morse_game.gb src/morse_adaptive.c
 
-# Source files
-CSOURCES = $(wildcard src/*.c)
-ASMSOURCES = $(wildcard src/*.s)
+# Build the fixed two-button version
+fixed: build_dir
+	$(LCC) $(LCCFLAGS) -o build/morse_game_fixed.gb src/morse_game_fixed.c
 
-# Build targets
-all: build_dir $(BINS)
+# Build the original simple version
+simple: build_dir
+	$(LCC) $(LCCFLAGS) -o build/morse_game_simple.gb src/morse_game.c
+
+# Build the complex multi-file version (currently broken - do not use)
+complex: build_dir
+	$(LCC) $(LCCFLAGS) -Iinclude/ -o build/morse_command.gb \
+		src/main.c src/game.c src/graphics.c src/audio.c \
+		src/morse_input.c src/missiles.c src/cities.c \
+		src/defense.c src/font_tiles.c
 
 # Create build directory if it doesn't exist
 build_dir:
 	@mkdir -p build
 
-# Compile and link all source files
-$(BINS): $(CSOURCES) $(ASMSOURCES)
-	$(LCC) $(LCCFLAGS) -o $@ $(CSOURCES) $(ASMSOURCES)
-
 # Clean build artifacts
 clean:
 	rm -rf build/*.gb build/*.map build/*.lst build/*.sym build/*.ihx build/*.cdb build/*.adb build/*.asm build/*.noi
 
-# Run in SameBoy emulator
-run: all
-	open -a SameBoy $(BINS)
+# Run the working game in SameBoy emulator
+run: simple
+	open -a SameBoy build/morse_game.gb
 
 # Debug build
 debug: LCCFLAGS += -debug -v
-debug: all
+debug: simple
 
-.PHONY: all clean run debug build_dir
+.PHONY: all simple complex clean run debug build_dir

@@ -11,11 +11,8 @@
 static uint8_t sound_timer = 0;
 
 void init_audio(void) {
-    // Enable sound system
-    NR52_REG = 0x80;  // Master sound enable
-    NR50_REG = 0x77;  // Volume max on both left and right
-    NR51_REG = 0xFF;  // Enable all channels on both speakers
-
+    // Don't enable sound at startup - only when needed
+    // This matches the working test_input.c approach
     sound_timer = 0;
 }
 
@@ -60,11 +57,31 @@ void play_tone(uint16_t frequency, uint8_t duration) {
 }
 
 void play_dot_beep(void) {
-    play_tone(MORSE_TONE_FREQ, DOT_DURATION);
+    // Enable sound system when playing
+    NR52_REG = 0x80;
+    NR51_REG = 0xFF;
+    NR50_REG = 0x77;
+
+    // Short beep for dot
+    NR10_REG = 0x00;
+    NR11_REG = 0x80;
+    NR12_REG = 0xF3;  // Envelope with decay
+    NR13_REG = 0x00;
+    NR14_REG = 0x86;  // Frequency and trigger
 }
 
 void play_dash_beep(void) {
-    play_tone(MORSE_TONE_FREQ, DASH_DURATION);
+    // Enable sound system when playing
+    NR52_REG = 0x80;
+    NR51_REG = 0xFF;
+    NR50_REG = 0x77;
+
+    // Longer beep for dash
+    NR10_REG = 0x00;
+    NR11_REG = 0x80;
+    NR12_REG = 0xF5;  // Envelope with slower decay
+    NR13_REG = 0x00;
+    NR14_REG = 0x85;  // Lower frequency and trigger
 }
 
 void play_success_sound(void) {

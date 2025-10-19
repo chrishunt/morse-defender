@@ -2,33 +2,26 @@
 #include <gbdk/console.h>
 #include <stdio.h>
 #include <stdint.h>
-// Remove all other includes for now to match working standalone
 
 void main(void) {
-    // Super minimal - exactly like test programs that work
-    // NO complex init - just start printing!
-
+    // Absolutely minimal - no other includes or dependencies
     printf("\n\n  MORSE COMMAND\n\n");
     printf("  DEFEND CITIES!\n\n");
     printf("  A: DIT   B: DAH\n\n");
     printf("   PRESS START\n");
 
-    // Simple game state
     uint8_t game_state = 0;
 
-    // Main game loop
     while(1) {
         uint8_t keys = joypad();
 
-        // Debug display
         gotoxy(0, 15);
         printf("Keys:%02X State:%d  ", keys, game_state);
 
-        // Check for START button
         if (game_state == 0 && (keys & J_START)) {
             game_state = 1;
             gotoxy(0, 12);
-            printf("GAME STARTED!");
+            printf("GAME STARTED!     ");
 
             // Beep
             NR52_REG = 0x80;
@@ -41,7 +34,6 @@ void main(void) {
             NR14_REG = 0x86;
         }
 
-        // Wait for vertical blank
         vsync();
     }
 }

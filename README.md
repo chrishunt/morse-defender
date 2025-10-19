@@ -1,173 +1,186 @@
-# Game Boy Color Morse Code Game
+# Morse Defender - Game Boy Color Game
+**v0.1 Beta**
 
-A Morse code learning game for the Game Boy Color, built with GBDK-2020.
+A morse code learning game for Game Boy where you defend your cities by entering morse code to destroy falling letters!
 
-## Features
+## 🎮 Quick Play
+Want to play immediately? Download the pre-built ROM:
+- **[morse_defender_v0.1_beta.gb](releases/morse_defender_v0.1_beta.gb)** - Latest beta release (v0.1)
 
-- **Game Boy Color Support**: Full color graphics with custom palettes
-- **Morse Code Training**: Learn and practice Morse code patterns
-- **Audio Feedback**: Distinct beeps for dots and dashes
-- **Input System**: A button for dots, B button for dashes
+Load this file in any Game Boy emulator (SameBoy, BGB, mGBA, etc.) or flash it to a cartridge for real hardware.
 
-## Requirements
+## 🏆 Current Status
+**✅ PLAYABLE BETA VERSION!**
 
-### Development Tools
+The game is fully playable with adaptive timing calibration, bottom-first targeting, and city defense mechanics. Letters fall from the sky and you must enter their morse code to destroy them before they damage your cities.
+
+## 🎯 How to Play
+
+### Objective
+Stop falling letters (A-Z) by entering their morse code pattern before they reach the ground!
+
+### Controls
+- **START** - Begin game / Return to title (from game over)
+- **A or B Button** - Morse key (tap for dit, hold for dah - both work identically)
+- **SELECT** - Clear morse input (during calibration and gameplay)
+
+### Gameplay
+1. **Calibration Phase**: Enter H (....) and C (-.-.) to calibrate timing
+2. Letters fall from the sky toward your cities
+3. Enter morse code using A or B button (tap for dit, hold for dah)
+4. The game adapts to your timing speed automatically
+5. Correct pattern = missile launches to destroy the letter (+10 points)
+6. Letters destroy buildings when they reach the bottom
+7. Game over when all buildings are destroyed
+
+### Tips
+- The game adapts to YOUR timing speed during calibration
+- Prioritizes bottom-most letters when multiple matches exist
+- Audio feedback helps you learn: different tones for dit/dah/hit/miss
+- Practice common letters: E (.), T (-), A (.-), O (---)
+
+## 🏗️ Building the Game
+
+### Requirements
 - **GBDK-2020**: Game Boy Development Kit (installed at `/opt/gbdk/`)
 - **Make**: Build automation tool
-- **SameBoy**: Game Boy emulator for macOS (or any GB/GBC emulator)
+- **SameBoy**: Game Boy Color emulator (or any GB/GBC emulator)
 
-### System Requirements
-- macOS, Linux, or Windows with appropriate tools
-- Game Boy Color emulator or actual hardware with flash cartridge
-
-## Building the Game
-
-### Quick Build and Run
+### Build Commands
 ```bash
-./run.sh
-```
+# Build the working game
+make
 
-### Manual Build
-```bash
-# Clean previous builds
-make clean
-
-# Build the ROM
-make all
-
-# Run in emulator
+# Build and run in emulator
 make run
+
+# Clean build files
+make clean
 ```
 
-### Build Output
-The compiled ROM file will be created at `build/morse_game.gb`
+The game ROM will be created at: **`build/morse_game.gb`** (development build)
 
-## Project Structure
+## 📁 Project Structure
 
 ```
-gbc-morse-code-game/
-├── src/               # Source code files
-│   ├── main.c        # Game entry point and main loop
-│   ├── graphics.c    # Display and rendering functions
-│   ├── input.c       # Button input handling
-│   ├── audio.c       # Sound generation for morse beeps
-│   └── morse.c       # Morse code logic and patterns
-├── include/          # Header files
-│   ├── graphics.h
-│   ├── input.h
-│   ├── audio.h
-│   └── morse.h
-├── res/              # Game resources
-│   └── tiles/        # Tile graphics (future)
-├── build/            # Build output directory
-├── Makefile          # Build configuration
-├── run.sh            # Build and launch script
-└── README.md         # This file
+morse-defender/
+├── releases/
+│   └── morse_defender_v0.1_beta.gb  ✅ Pre-built ROM ready to play!
+├── src/
+│   ├── morse_adaptive.c  ✅ Main game with adaptive timing
+│   ├── morse_game_fixed.c
+│   └── morse_game.c
+├── build/
+│   └── morse_game.gb     # Development build
+├── include/              # Header files
+├── README.md            # This file
+├── Makefile            # Build configuration
+└── run.sh              # Build & launch script
 ```
 
-## Controls
+## 🎯 Current Features
 
-- **START**: Start game from title screen
-- **A Button**: Input a dot (.)
-- **B Button**: Input a dash (-)
-- **D-Pad**: Navigate menus (future)
+### Working in Morse Defender v0.1 Beta
+- ✅ **Adaptive timing calibration** - Learns your morse speed
+- ✅ **Smart targeting** - Prioritizes most dangerous threats
+- ✅ **Falling letter missiles** (A-Z)
+- ✅ **Real-time morse input** - Single button with timing detection
+- ✅ **Missile defense system** - Visual missiles with trails
+- ✅ **City buildings** - 6 destructible targets
+- ✅ **Score tracking** - 10 points per successful defense
+- ✅ **Audio feedback** - Distinct tones for game events
+- ✅ **Sprite-based graphics** - Missiles, explosions, and trails
 
-## Morse Code Reference
+### Display
+- Text-based using printf() (no sprites yet)
+- Shows score and health at top
+- Falling letter visible on screen
+- Morse input buffer displayed
+- Pattern hint shown at bottom
+
+## 📖 Morse Code Reference
 
 ### Letters
-- A: .-
-- B: -...
-- C: -.-.
-- D: -..
-- E: .
-- F: ..-.
-- G: --.
-- H: ....
-- I: ..
-- J: .---
-- K: -.-
-- L: .-..
-- M: --
-- N: -.
-- O: ---
-- P: .--.
-- Q: --.-
-- R: .-.
-- S: ...
-- T: -
-- U: ..-
-- V: ...-
-- W: .--
-- X: -..-
-- Y: -.--
-- Z: --..
+| Letter | Morse | Letter | Morse |
+|--------|-------|--------|-------|
+| A | .- | N | -. |
+| B | -... | O | --- |
+| C | -.-. | P | .--. |
+| D | -.. | Q | --.- |
+| E | . | R | .-. |
+| F | ..-. | S | ... |
+| G | --. | T | - |
+| H | .... | U | ..- |
+| I | .. | V | ...- |
+| J | .--- | W | .-- |
+| K | -.- | X | -..- |
+| L | .-.. | Y | -.-- |
+| M | -- | Z | --.. |
 
 ### Numbers
-- 0: -----
-- 1: .----
-- 2: ..---
-- 3: ...--
-- 4: ....-
-- 5: .....
-- 6: -....
-- 7: --...
-- 8: ---..
-- 9: ----.
+| Number | Morse | Number | Morse |
+|--------|-------|--------|-------|
+| 0 | ----- | 5 | ..... |
+| 1 | .---- | 6 | -.... |
+| 2 | ..--- | 7 | --... |
+| 3 | ...-- | 8 | ---.. |
+| 4 | ....- | 9 | ----. |
 
-## Development
+## 🛠️ Technical Details
 
-### Adding New Features
-The codebase is structured modularly. Key areas for expansion:
-
-1. **Game Modes**: Add training, practice, and challenge modes
-2. **Scoring System**: Track accuracy and speed
-3. **Save States**: Implement SRAM saving for progress
-4. **Graphics**: Add tile graphics and sprites
-5. **Sound**: Expand audio with music and more effects
-
-### Compiling for Different Targets
-- **Game Boy Classic**: Remove `-Wm-yC` flag from Makefile
-- **Super Game Boy**: Add SGB border support in graphics.c
-- **Game Boy Pocket**: Works without modifications
-
-## Technical Details
-
-- **ROM Size**: 32KB (no banking)
-- **RAM**: 8KB internal
-- **Display**: 160x144 pixels
-- **Colors**: 56 simultaneous from 32,768 palette (GBC mode)
-- **Sound**: 4 channels (using channel 1 for morse beeps)
+- **Platform**: Game Boy Color (backward compatible)
+- **ROM Size**: 32KB
+- **Resolution**: 160x144 pixels
 - **Frame Rate**: 60 FPS
+- **Colors**: 56 simultaneous from 32,768 palette
+- **Max Sprites**: 40 on screen
+- **Sound**: 4 channels (morse beeps, explosions, effects)
 
-## Troubleshooting
+## 🎮 Tips & Strategy
 
-### Build Errors
-- Ensure GBDK-2020 is installed at `/opt/gbdk/`
-- Check that PATH includes GBDK binaries
-- Verify all source files are present
+1. **Learn Common Letters First**: E (.), T (-), A (.-) appear frequently
+2. **Quick Input**: Enter morse code quickly - missiles don't wait!
+3. **Prioritize Threats**: Focus on missiles closest to cities
+4. **Practice Mode**: Start with slower waves to learn patterns
+5. **Memory Aid**: Keep this README open for morse reference!
 
-### Runtime Issues
-- If no sound, check emulator audio settings
-- For color issues, ensure GBC mode is enabled in emulator
-- Button input problems may require controller configuration
+## 🔧 Technical Details
 
-## Future Enhancements
+- **Platform**: Game Boy / Game Boy Color
+- **Display**: 160x144 pixels (20x18 text characters)
+- **Development Kit**: GBDK-2020
+- **Code**: Single file implementation (~300 lines)
+- **ROM Size**: 32KB
+- **Display Fix**: Uses `SHOW_BKG` and `DISPLAY_ON` for proper rendering
 
-- [ ] Complete morse alphabet with punctuation
-- [ ] Add difficulty levels
-- [ ] Implement word and phrase challenges
-- [ ] Create custom tile graphics
-- [ ] Add background music
-- [ ] Implement high score system
-- [ ] Add multiplayer link cable support
-- [ ] Create training tutorials
+## 🐛 Known Issues & Solutions
 
-## License
+### Fixed
+- ✅ White screen issue - Fixed by adding `SHOW_BKG` and `DISPLAY_ON`
+- ✅ Button input not working - Simplified initialization
+- ✅ Display corruption - Removed conflicting sprite/font code
+
+### Current Limitations
+- Text-only display (no sprites yet)
+- Numbers 0-9 not included (only letters A-Z)
+- No difficulty progression yet
+- No pause function
+- High score not saved
+
+## 📝 License
 
 This project is for educational purposes. Feel free to modify and distribute.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - GBDK-2020 development team
-- Game Boy homebrew community
+- Original Missile Command by Dave Theurer (Atari, 1980)
 - Morse code inventors Samuel Morse and Alfred Vail
+- Game Boy homebrew community
+
+## 🎯 Challenge Yourself!
+
+Can you survive 10 waves? The missiles get faster and more numerous with each wave. Share your high scores and prove you're a morse code master!
+
+---
+Built with GBDK-2020 for Game Boy Color
